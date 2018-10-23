@@ -27,6 +27,5 @@ def showImage():
     
     cv2.destroyAllWindows()  # 생성한 윈도우 제거
 
-
 if __name__ == '__main__':
     showImage()    
