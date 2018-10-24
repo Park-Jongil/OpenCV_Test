@@ -1,13 +1,17 @@
 import cv2
 
 def VideoCaptureCode() :
+    CheckCam = False
     cap = cv2.VideoCapture(0)
-    if cap.isOpen():
-        print('width: {}, height : {}'.format(cap.get(3), cap.get(4)))
+    try:
+        if cap.isOpen():
+            print('width: {}, height : {}'.format(cap.get(3), cap.get(4)))
+            CheckCam = True
+    except :
+        print( "Except Error")
         
-    while True :
+    while CheckCam :
         ret, fram = cap.read()
-        
         if ret:
             gray = cv2.cvtColor(fram, cv2.COLOR_BGR2GRAY)
             cv2.imshow('video', gray)
