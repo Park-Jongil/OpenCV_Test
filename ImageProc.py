@@ -63,7 +63,41 @@ def ImageFiltering():
     cv2.waitKey(0) & 0xFF
     cv2.destroyAllWindows()
 
+def Image_Threshold():
+    FILENAME1 = '../Images/backgrd1.jpg'
+    img = cv2.imread(FILENAME1, cv2.IMREAD_GRAYSCALE)
+    
+    ret , thr1 = cv2.threshold( img , 127, 255, cv2.THRESH_BINARY)
+    ret , thr2 = cv2.threshold( img , 127, 255, cv2.THRESH_BINARY_INV)
+    ret , thr3 = cv2.threshold( img , 127, 255, cv2.THRESH_TRUNC)
+    ret , thr4 = cv2.threshold( img , 127, 255, cv2.THRESH_TOZERO)
+    ret , thr5 = cv2.threshold( img , 127, 255, cv2.THRESH_TOZERO_INV)
+
+    cv2.imshow( 'Original' , img )
+    cv2.imshow( 'Binary' , thr1 )
+    cv2.imshow( 'Binary_INV' , thr2 )
+    cv2.imshow( 'TRUNC' , thr3 )
+    cv2.imshow( 'TOZERO' , thr4 )
+    cv2.imshow( 'TOZERO_INV' , thr5 )
+
+    cv2.waitKey(0) & 0xFF
+    cv2.destroyAllWindows()
+
+
+def Image_Threshold_01():
+    FILENAME1 = '../Images/backgrd1.jpg'
+    img = cv2.imread(FILENAME1, cv2.IMREAD_GRAYSCALE)
+    ret , thr1 = cv2.threshold( img , 127, 255, cv2.THRESH_BINARY)
+    thr2 = cv2.adaptiveThreshold( img , 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11,2)
+    thr3 = cv2.adaptiveThreshold( img , 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11,2)
+    titles = [ 'Original', 'Global Threshod(v=127)', 'Adaptive MEAN', 'Adaptive Gaussian' ] 
+    images = [ img , thr1 , thr2 , thr3 ]
+    for i in range(4) :
+        cv2.imshow( titles[i] , images[i])
+
+    cv2.waitKey(0) & 0xFF
+    cv2.destroyAllWindows()
 
 
 if __name__ == '__main__':
-    ImageFiltering()    
+    Image_Threshold_01()    
